@@ -1,0 +1,9 @@
+Steps to create a Cucumber BDD framework
+
+1. Create a new Maven project and add project dependencies
+   -selenium, cucumber-java, cucumber-junit, cucumber-core, faker.
+1a.Add the necessary framework components (.properties file, .gitignore, utility classes )
+2. Create a package structure (pages,runners, stepDefinitions, utils)
+3. Create resources folder under test and add a feature file (add Cucumber Java and Gherkin plugin to IntelliJ)
+4. Create a cucumber feature file (feature file represents a user story, should be named after a feature, e.g. sign-in.feature)
+5.
