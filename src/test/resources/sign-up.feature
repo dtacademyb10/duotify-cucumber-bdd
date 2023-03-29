@@ -19,6 +19,30 @@ Feature: Sign Up feature
     Then the user should see an error message
     And the sign-up process should not proceed
 
+    @currentTest
+  Scenario: User enters a weak password
+    Given the user is on the sign-up page
+    When the user enters a weak password
+    And clicks on the sign-up button
+    Then the user should see an error message for password
+    And the sign-up process should not proceed
+
+
+  Scenario: User password and confirm password do not match
+    Given the user is on the sign-up page
+    When the user enters a password
+    And enters a different password in the confirm password field
+    And clicks on the sign-up button
+    Then the user should see an error message
+    And the sign-up process should not proceed
+
+
+  Scenario: User already has an account
+    Given the user is on the sign-up page
+    When the user enters an email address that is already associated with an account
+    And clicks on the sign-up button
+    Then the user should see an error message
+    And the sign-up process should not proceed
 
 
 

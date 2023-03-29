@@ -6,4 +6,7 @@ Steps to create a Cucumber BDD framework
 2. Create a package structure (pages,runners, stepDefinitions, utils)
 3. Create resources folder under test and add a feature file (add Cucumber Java and Gherkin plugin to IntelliJ)
 4. Create a cucumber feature file (feature file represents a user story, should be named after a feature, e.g. sign-in.feature)
-5.
+5. Create a Runner class that connects the feature file steps to step definitions and add the necessary configuration
+6. Generate step definition methods for unimplemented steps
+7. Implement each step definition method's logic
+8. To run a specific scenario/s, mark the scenario with a specific tag (@temp) and then run it through the Runner class by mentioning the tag in tags option

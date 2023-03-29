@@ -52,4 +52,21 @@ public class SignUpStepDefs {
     public void the_sign_up_process_should_not_proceed() {
          Assert.assertEquals("http://duotify.us-east-2.elasticbeanstalk.com/register.php", Driver.getDriver().getCurrentUrl());
     }
+
+
+    @When("the user enters a weak password")
+    public void the_user_enters_a_weak_password() {
+        HomePage homePage = new HomePage();
+        homePage.enterWeakPassword();
+        homePage.clickOnRegisterButton();
+
+    }
+
+
+    @Then("the user should see an error message for password")
+    public void theUserShouldSeeAnErrorMessageForPassword() {
+
+        SeleniumUtils.waitForVisibility(new HomePage().getPasswordErrorMessage(), 5);
+        Assert.assertTrue(new HomePage().getPasswordErrorMessage().isDisplayed());
+    }
 }

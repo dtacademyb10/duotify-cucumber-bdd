@@ -58,6 +58,10 @@ public class HomePage {
     private WebElement emailErrorMessage;
 
 
+    @FindBy (xpath = "//span[.='Your password must be between 5 and 30 characters']")
+    private WebElement passWordError;
+
+
 
 
     public void fillTheFormWithRandomData(){
@@ -88,5 +92,25 @@ public class HomePage {
         this.password2.sendKeys(pass);
 
 
+    }
+
+    public void enterWeakPassword() {
+
+        Faker faker = new Faker();
+        username.sendKeys(faker.name().username());
+        firstName.sendKeys(faker.name().firstName());
+        lastName.sendKeys(faker.name().lastName());
+        String email = faker.internet().emailAddress();
+        this.email.sendKeys(email);
+        email2.sendKeys(email);
+        String pass = "123";
+        this.password.sendKeys(pass);
+        this.password2.sendKeys(pass);
+    }
+
+    public WebElement getPasswordErrorMessage() {
+
+
+        return  passWordError;
     }
 }
