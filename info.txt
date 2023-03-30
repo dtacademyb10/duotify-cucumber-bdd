@@ -10,3 +10,16 @@ Steps to create a Cucumber BDD framework
 6. Generate step definition methods for unimplemented steps
 7. Implement each step definition method's logic
 8. To run a specific scenario/s, mark the scenario with a specific tag (@temp) and then run it through the Runner class by mentioning the tag in tags option
+
+
+
+How Cucumber Background is different from Hook?
+1. Purpose: Hook is used for configuration logic whereas Background is used for test logic
+2. Scope: Hook is applicable to all scenarios whereas Background is applicable only to scenarios within a single feature file
+
+
+How to run scenarios with specific tag/s through CMD in Cucumber?
+
+mvn test -D cucumber.filter.tags=@positive
+mvn test -D cucumber.filter.tags="@positive and @smoke"
+mvn test -D cucumber.filter.tags="@positive or @smoke"
