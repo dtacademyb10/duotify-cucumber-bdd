@@ -88,7 +88,7 @@ public class SignUpStepDefs {
     public void the_user_enters_an_email_address_that_is_already_associated_with_an_account() {
             new HomePage().enterAlreadyUsedEmailAddress();
     }
-    @Then("the user should see an error message for an alraedy used email")
+    @Then("the user should see an error message for an already used email")
     public void the_user_should_see_an_error_message_for_an_alraedy_used_email() {
         SeleniumUtils.waitForVisibility(new HomePage().getAlreadyUsedEmailErrorMessage(), 5);
         Assert.assertTrue(new HomePage().getAlreadyUsedEmailErrorMessage().isDisplayed());

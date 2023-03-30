@@ -37,7 +37,7 @@ Feature: Sign Up feature
   Scenario: User already has an account
     When the user enters an email address that is already associated with an account
     And clicks on the sign-up button
-    Then the user should see an error message for an alraedy used email
+    Then the user should see an error message for an already used email
     And the sign-up process should not proceed
 
 
