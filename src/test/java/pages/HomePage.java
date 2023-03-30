@@ -2,6 +2,7 @@ package pages;
 
 import com.github.javafaker.Faker;
 import io.cucumber.java.de.Wenn;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -9,6 +10,11 @@ import utils.Driver;
 
 public class HomePage {
 
+
+    @FindBy (xpath = "//span[.=\"Your passwords don't match\"]")
+    private WebElement passwordConfirmErrorMessage;
+    @FindBy (xpath = "//span[.='This email is already in use']")
+    private WebElement alreadyUsedEmailErrorMessage;
 
     public HomePage(){
         PageFactory.initElements(Driver.getDriver(), this);
@@ -112,5 +118,42 @@ public class HomePage {
 
 
         return  passWordError;
+    }
+
+    public void enterNonMatchingPasswords() {
+
+        Faker faker = new Faker();
+        username.sendKeys(faker.name().username());
+        firstName.sendKeys(faker.name().firstName());
+        lastName.sendKeys(faker.name().lastName());
+        String email = faker.internet().emailAddress();
+        this.email.sendKeys(email);
+        email2.sendKeys(email);
+        this.password.sendKeys("123456");
+        this.password2.sendKeys("1234567");
+    }
+
+    public WebElement getPasswordConfirmErrorMessage() {
+         return passwordConfirmErrorMessage;
+
+    }
+
+    public void enterAlreadyUsedEmailAddress() {
+
+        Faker faker = new Faker();
+        username.sendKeys(faker.name().username());
+        firstName.sendKeys(faker.name().firstName());
+        lastName.sendKeys(faker.name().lastName());
+
+        this.email.sendKeys("duotech2023@gmail.com");
+        email2.sendKeys("duotech2023@gmail.com");
+        String pass = "123456";
+        this.password.sendKeys(pass);
+        this.password2.sendKeys(pass);
+    }
+
+    public WebElement getAlreadyUsedEmailErrorMessage() {
+
+        return alreadyUsedEmailErrorMessage;
     }
 }

@@ -42,7 +42,7 @@ public class SignUpStepDefs {
          new HomePage().clickOnRegisterButton();
 
     }
-    @Then("the user should see an error message")
+    @Then("the user should see an error message for email")
     public void the_user_should_see_an_error_message() {
 
         SeleniumUtils.waitForVisibility(new HomePage().getEmailErrorMessage(), 5);
@@ -69,4 +69,29 @@ public class SignUpStepDefs {
         SeleniumUtils.waitForVisibility(new HomePage().getPasswordErrorMessage(), 5);
         Assert.assertTrue(new HomePage().getPasswordErrorMessage().isDisplayed());
     }
+
+    @When("the user enters a password and enters a different password in the confirm password field")
+    public void the_user_enters_a_password() {
+         HomePage homePage = new HomePage();
+
+         new HomePage().enterNonMatchingPasswords();
+    }
+
+    @Then("the user should see an error message for confirm password")
+    public void theUserShouldSeeAnErrorMessageForConfirmPassword() {
+        SeleniumUtils.waitForVisibility(new HomePage().getPasswordConfirmErrorMessage(), 5);
+        Assert.assertTrue(new HomePage().getPasswordConfirmErrorMessage().isDisplayed());
+
+    }
+
+    @When("the user enters an email address that is already associated with an account")
+    public void the_user_enters_an_email_address_that_is_already_associated_with_an_account() {
+            new HomePage().enterAlreadyUsedEmailAddress();
+    }
+    @Then("the user should see an error message for an alraedy used email")
+    public void the_user_should_see_an_error_message_for_an_alraedy_used_email() {
+        SeleniumUtils.waitForVisibility(new HomePage().getAlreadyUsedEmailErrorMessage(), 5);
+        Assert.assertTrue(new HomePage().getAlreadyUsedEmailErrorMessage().isDisplayed());
+    }
+
 }
