@@ -12,14 +12,14 @@ Feature: Sign Up feature
     And clicks on the sign-up button
     Then the user is redirected to the home page
 
-  @positive
+  @test
   Scenario: User enters invalid email address
     When the user enters an invalid email address
     And clicks on the sign-up button
     Then the user should see an error message for email
     And the sign-up process should not proceed
 
-  @smoke
+  @test
   Scenario: User enters a weak password
     When the user enters a weak password
     And clicks on the sign-up button

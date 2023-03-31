@@ -12,14 +12,66 @@ Steps to create a Cucumber BDD framework
 8. To run a specific scenario/s, mark the scenario with a specific tag (@temp) and then run it through the Runner class by mentioning the tag in tags option
 
 
+In Cucumber framework:
+  - the test scenarios are put in a feature file which are usually are created under resources folder
+  - the feature file scenario steps are connected to step definitions through @CucumberOptions glue option in Runner class
+  - Cucumber scenario step is matched to step definition method using the text of the scenario step
+    either with Cucumber Expressions or Regular Expressions
+  - tags are the main way to control what scenario or feature files
+  - Background -> the common steps for ALL scenarios of a feature file can be moved to Background steps
+  - Hooks -> Step definition methods annotated with @Before and @After that are executed before/after each SCENARIO
+             The annotated methods can be added into any class under Step Definitions folder but usually added into a separate class
+  - Cucumber offers 3 types of Hooks: @BeforeAll, @AfterAll, @Before, @After, @BeforeStep, @AfterStep
+
+
 
 How Cucumber Background is different from Hook?
 1. Purpose: Hook is used for configuration logic whereas Background is used for test logic
 2. Scope: Hook is applicable to all scenarios whereas Background is applicable only to scenarios within a single feature file
 
 
+
+Reporting in Cucumber Framework
+- Cucumber comes with its own built-in HTML report. To enable it, we need to add the HTML plugin with the path to the file in @CucumberOptions
+   e.g    plugin = {"html:target/basic-report/report.html"}
+
+How did you implement taking a screenshot on failure in Cucumber?
+- In @After hook, we used Scenario class and checked if scenario is failed, and took a screenshot with Selenium and attached the scrrenshot file with Scenario class's attach method.
+  e.g. public void tearDownScenario(Scenario scenario){
+          if(scenario.isFailed()){
+              scenario.attach(((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES), "image/png", "screenshot");
+          }
+    }
+
+
+How do you run your scenarios through CMD in Cucumber framework?
+- Using Maven Surefire plugin and mvn test command
+    e.g.
+    <build>
+            <pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <configuration>
+                           <includes>
+                               <include>CucumberRunner.java</include>
+                           </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </pluginManagement>
+        </build>
+
+
+
+
+
 How to run scenarios with specific tag/s through CMD in Cucumber?
 
-mvn test -D cucumber.filter.tags=@positive
+mvn test -D cucumber.filter.tags="@positive"
 mvn test -D cucumber.filter.tags="@positive and @smoke"
 mvn test -D cucumber.filter.tags="@positive or @smoke"
+
+When you pass the tags through CMD with -D cucumber.filter.tags, it will override the Runner class's tags.

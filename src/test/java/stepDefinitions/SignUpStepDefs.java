@@ -1,13 +1,10 @@
 package stepDefinitions;
 
-import com.github.javafaker.Faker;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import pages.HomePage;
-import utils.ConfigReader;
+import pages.SignUpPage;
 import utils.Driver;
 import utils.SeleniumUtils;
 
@@ -16,19 +13,19 @@ public class SignUpStepDefs {
 
     @Given("the user is on the sign-up page")
     public void the_user_is_on_the_sign_up_page() {
-        HomePage homePage = new HomePage();
-        homePage.clickOnSignUpLink();
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.clickOnSignUpLink();
 
     }
     @When("the user enters valid information including username, first name, last name, email, confirm email, password, and confirm password")
     public void the_user_enters_valid_information_including_first_name_last_name_email_password_and_confirm_password() {
 
-     new HomePage().fillTheFormWithRandomData();
+     new SignUpPage().fillTheFormWithRandomData();
 
     }
-    @When("clicks on the sign-up button")
+    @When("^clicks on the sign-up button$")
     public void clicks_on_the_sign_up_button() {
-        new HomePage().clickOnRegisterButton();
+        new SignUpPage().clickOnRegisterButton();
     }
     @Then("the user is redirected to the home page")
     public void the_user_is_redirected_to_the_home_page() {
@@ -38,15 +35,15 @@ public class SignUpStepDefs {
 
     @When("the user enters an invalid email address")
     public void the_user_enters_an_invalid_email_address() throws InterruptedException {
-         new HomePage().enterInvalidEmailAddress();
-         new HomePage().clickOnRegisterButton();
+         new SignUpPage().enterInvalidEmailAddress();
+         new SignUpPage().clickOnRegisterButton();
 
     }
     @Then("the user should see an error message for email")
     public void the_user_should_see_an_error_message() {
 
-        SeleniumUtils.waitForVisibility(new HomePage().getEmailErrorMessage(), 5);
-        Assert.assertTrue(new HomePage().getEmailErrorMessage().isDisplayed());
+        SeleniumUtils.waitForVisibility(new SignUpPage().getEmailErrorMessage(), 5);
+        Assert.assertTrue(new SignUpPage().getEmailErrorMessage().isDisplayed());
     }
     @Then("the sign-up process should not proceed")
     public void the_sign_up_process_should_not_proceed() {
@@ -56,9 +53,9 @@ public class SignUpStepDefs {
 
     @When("the user enters a weak password")
     public void the_user_enters_a_weak_password() {
-        HomePage homePage = new HomePage();
-        homePage.enterWeakPassword();
-        homePage.clickOnRegisterButton();
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.enterWeakPassword();
+        signUpPage.clickOnRegisterButton();
 
     }
 
@@ -66,32 +63,32 @@ public class SignUpStepDefs {
     @Then("the user should see an error message for password")
     public void theUserShouldSeeAnErrorMessageForPassword() {
 
-        SeleniumUtils.waitForVisibility(new HomePage().getPasswordErrorMessage(), 5);
-        Assert.assertTrue(new HomePage().getPasswordErrorMessage().isDisplayed());
+        SeleniumUtils.waitForVisibility(new SignUpPage().getPasswordErrorMessage(), 5);
+        Assert.assertTrue(new SignUpPage().getPasswordErrorMessage().isDisplayed());
     }
 
-    @When("the user enters a password and enters a different password in the confirm password field")
+    @When("^the user enters a password and enters a different password in the confirm password field$")
     public void the_user_enters_a_password() {
-         HomePage homePage = new HomePage();
+         SignUpPage signUpPage = new SignUpPage();
 
-         new HomePage().enterNonMatchingPasswords();
+         new SignUpPage().enterNonMatchingPasswords();
     }
 
     @Then("the user should see an error message for confirm password")
     public void theUserShouldSeeAnErrorMessageForConfirmPassword() {
-        SeleniumUtils.waitForVisibility(new HomePage().getPasswordConfirmErrorMessage(), 5);
-        Assert.assertTrue(new HomePage().getPasswordConfirmErrorMessage().isDisplayed());
+        SeleniumUtils.waitForVisibility(new SignUpPage().getPasswordConfirmErrorMessage(), 5);
+        Assert.assertTrue(new SignUpPage().getPasswordConfirmErrorMessage().isDisplayed());
 
     }
 
     @When("the user enters an email address that is already associated with an account")
     public void the_user_enters_an_email_address_that_is_already_associated_with_an_account() {
-            new HomePage().enterAlreadyUsedEmailAddress();
+            new SignUpPage().enterAlreadyUsedEmailAddress();
     }
     @Then("the user should see an error message for an already used email")
     public void the_user_should_see_an_error_message_for_an_alraedy_used_email() {
-        SeleniumUtils.waitForVisibility(new HomePage().getAlreadyUsedEmailErrorMessage(), 5);
-        Assert.assertTrue(new HomePage().getAlreadyUsedEmailErrorMessage().isDisplayed());
+        SeleniumUtils.waitForVisibility(new SignUpPage().getAlreadyUsedEmailErrorMessage(), 5);
+        Assert.assertTrue(new SignUpPage().getAlreadyUsedEmailErrorMessage().isDisplayed());
     }
 
 }

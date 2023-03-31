@@ -14,18 +14,18 @@ import org.junit.runner.RunWith;
 //        you could combine any number or type of tags -> "@positive and @signUp or @smoke"
         // omitting tags entirely will run everything under the given path in features, you could use it to run regression
 
-        tags = "@smoke",
+        tags = "@homepage",
 //
 
         features = "src/test/resources", // the path where all feature files are located
         glue = "stepDefinitions", // path where all step definition classes are located
-        stepNotifications = true,  // to display detailed step results
+//        stepNotifications = true,  // to display detailed step results
         plugin = {
                 "pretty", // adds more detailed output log in the cmd console
                "html:target/basic-report/report.html"  // to generate a basic built-in report
         }
 
-//        ,dryRun = true  // to generate step definition snippets without actually running the scenario
+        ,dryRun = true  // to generate step definition snippets without actually running the scenario
 
 )
 public class CucumberRunner {

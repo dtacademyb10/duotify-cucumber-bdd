@@ -1,14 +1,12 @@
 package pages;
 
 import com.github.javafaker.Faker;
-import io.cucumber.java.de.Wenn;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.Driver;
 
-public class HomePage {
+public class SignUpPage {
 
 
     @FindBy (xpath = "//span[.=\"Your passwords don't match\"]")
@@ -16,7 +14,7 @@ public class HomePage {
     @FindBy (xpath = "//span[.='This email is already in use']")
     private WebElement alreadyUsedEmailErrorMessage;
 
-    public HomePage(){
+    public SignUpPage(){
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
