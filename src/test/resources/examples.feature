@@ -17,3 +17,14 @@ Feature: Example scenarios to demo the concepts
   Scenario: Verify the product price
     Given I am on the homepage of e-commerce
     Then the first promoted product price should be 34.66
+
+     @datatableDemo
+    Scenario: Verify Dropdown options
+      Given I am on the homepage
+      When I click on reason for loan dropdown
+      Then I should see the following options
+            |Mortgage		|
+            |Auto Loan		|
+            |Personal loan	|
+            |Student Loan	|
+

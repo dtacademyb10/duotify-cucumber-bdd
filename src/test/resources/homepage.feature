@@ -3,13 +3,13 @@ Feature: Music Streaming App Homepage
   As a music lover, I want to be able to access and explore music easily through a music streaming app. The homepage of the app should display 9 albums on the main page and have a left sidebar with links to Search, Browse, Your Music, and Edit User profile options.
 
 
-  Scenario: User opens the app and sees 9 recommended albums on the homepage
+  Scenario: User opens the app and sees certain number of recommended albums on the homepage
     Given the user is on the homepage of the music streaming app
     Then the user should see 9 recommended albums displayed on the main page
 #
-#  Scenario: User clicks on an album cover and is taken to the album page
+#  Scenario: User clicks on an album and is taken to the album page
 #    Given the user is on the homepage of the music streaming app
-#    When the user clicks on an album cover
+#    When the user clicks on an album
 #    Then the user should be taken to the album page, where they can view its tracklist, see album information such as Title, Artist and Song Count.
 #
 
