@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
                "html:target/basic-report/report.html"  // to generate a basic built-in report
         }
 
-        ,dryRun = true  // to generate step definition snippets without actually running the scenario
+//        ,dryRun = true  // to generate step definition snippets without actually running the scenario
 
 )
 public class CucumberRunner {

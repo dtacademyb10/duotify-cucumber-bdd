@@ -2,7 +2,7 @@ Feature: Music Streaming App Homepage
 
   As a music lover, I want to be able to access and explore music easily through a music streaming app. The homepage of the app should display 9 albums on the main page and have a left sidebar with links to Search, Browse, Your Music, and Edit User profile options.
 
-  @homepage
+
   Scenario: User opens the app and sees 9 recommended albums on the homepage
     Given the user is on the homepage of the music streaming app
     Then the user should see 9 recommended albums displayed on the main page
@@ -12,22 +12,36 @@ Feature: Music Streaming App Homepage
 #    When the user clicks on an album cover
 #    Then the user should be taken to the album page, where they can view its tracklist, see album information such as Title, Artist and Song Count.
 #
-#  Scenario: User clicks on the Your Music link in the sidebar
-#    Given the user is on the homepage of the music streaming app
-#    When the user clicks on the Your Music link in the sidebar
-#    Then the user should be able to access their personal music library, where they can view, create, edit and delete playlists.
+
+
+  Scenario: User clicks on the Your Music link in the sidebar
+    Given the user is on the homepage of the music streaming app
+    When the user clicks on the "Your Music" link in the sidebar
+    Then the user should be able to access their personal music library, where they can view, create, edit and delete playlists.
+
+  Scenario: User clicks on the Username link in the sidebar
+    Given the user is on the homepage of the music streaming app
+    When the user clicks on the "Duotech Academy" link in the sidebar
+    Then the user should be able to view and edit their user profile information, such as their name, email address, password and should be able to log out.
 #
-#  Scenario: User clicks on the Edit User link in the sidebar
-#    Given the user is on the homepage of the music streaming app
-#    When the user clicks on the Edit User link in the sidebar
-#    Then the user should be able to view and edit their user profile information, such as their name, email address, password and should be able to log out.
+
+  Scenario: User clicks on the Browse link in the sidebar
+    Given the user is on the homepage of the music streaming app
+    When the user clicks on the "Browse" link in the sidebar
+    Then the user should be able to view recommended albums
+
+
+  Scenario: User clicks on the Search link in the sidebar
+    Given the user is on the homepage of the music streaming app
+    When the user clicks on the "Search" link in the sidebar
+    Then the user should be able to search for an artist, album or tracks
 #
-#
-#  Scenario: User plays a song from an album
-#    Given the user is on the home page of the music streaming app
-#    When the user selects the song "Daughter" from the album "Oscillation"
-#    And the user clicks on the play button
-#    Then the song "Daughter" should start playing
+
+  @homepage
+  Scenario: User plays a song from an album
+    Given the user is on the homepage of the music streaming app
+    When the user selects the song "Marisa" from the album "Marisa" the user clicks on the play button
+    Then the song "Marisa" should start playing
 #
 #
 #  Scenario Outline: User plays a given song from given album
