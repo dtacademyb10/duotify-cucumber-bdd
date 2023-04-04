@@ -75,3 +75,8 @@ mvn test -D cucumber.filter.tags="@positive and @smoke"
 mvn test -D cucumber.filter.tags="@positive or @smoke"
 
 When you pass the tags through CMD with -D cucumber.filter.tags, it will override the Runner class's tags.
+
+
+Lombok is used to reduce boilerplate code for classes, e.g., it can generate getters and setters for those objects automatically by using Lombok annotations.
+The easiest way is to use the @Data annotation.
+In our Framework we used Lombok annotation @Data for our Page classes to automatically generate getter methods to be accessible outside in our Test code.

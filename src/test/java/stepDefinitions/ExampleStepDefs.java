@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 
 import java.sql.SQLOutput;
 import java.util.List;
+import java.util.Map;
 
 public class ExampleStepDefs {
 
@@ -48,4 +49,50 @@ public class ExampleStepDefs {
     public void i_should_see_the_following_options(List<String> dataTable) {
         System.out.println(dataTable);
     }
+
+
+
+    @Given("the user is on the registration page")
+    public void the_user_is_on_the_registration_page() {
+
+    }
+    @When("the user enters the following details")
+    public void the_user_enters_the_following_details(Map<String, String> dataTable) {
+
+        System.out.println(dataTable);
+        dataTable.get("Password");
+
+
+    }
+    @When("the user clicks the submit button")
+    public void the_user_clicks_the_submit_button() {
+
+    }
+    @Then("the user is registered successfully")
+    public void the_user_is_registered_successfully() {
+
+    }
+
+    @Given("I have the following info")
+    public void i_have_the_following_info(List<List<String>> dataTable) {
+
+        System.out.println(dataTable);
+        System.out.println(dataTable.get(2).get(1));
+    }
+
+
+    @Given("I have the following info as List of Maps")
+    public void i_have_the_following_info_as_list_of_maps(List<Map<String,String>> dataTable) {
+        System.out.println(dataTable);
+
+//        System.out.println(dataTable.get(2).get("lastName"));
+    }
+
+    @Given("I have the following info as Map")
+    public void i_have_the_following_info_as_map(Map<String, List<String> > dataTable) {
+        System.out.println(dataTable);
+
+        System.out.println(dataTable.get("KJFK").get(1));
+    }
+
 }

@@ -57,11 +57,11 @@
             <version>2.11.0</version>
         </dependency>
 
-        <!--    to remove the error when running tests thru command line-->
+        <!--    to generate getters and setters automatically for our Page classes-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <version>1.18.26</version>
             <optional>true</optional>
         </dependency>
 

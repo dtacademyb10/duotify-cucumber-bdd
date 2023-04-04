@@ -1,5 +1,6 @@
 package pages;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +11,6 @@ import utils.SeleniumUtils;
 import java.util.List;
 
 public class HomePage {
-
 
     public HomePage(){
         PageFactory.initElements(Driver.getDriver(), this);
@@ -42,5 +42,5 @@ public class HomePage {
 
 
 
-    //span[@class='trackName'][.='Escape']/parent::div/preceding-sibling::div/img
+
 }

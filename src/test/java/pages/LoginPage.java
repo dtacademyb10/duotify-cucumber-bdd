@@ -1,11 +1,12 @@
 package pages;
 
+import lombok.Data;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utils.Driver;
-
+@Data
 public class LoginPage {
 
     @FindBy(id = "loginUsername")
@@ -18,7 +19,7 @@ public class LoginPage {
     }
 
     public void login (String user, String password){
-        loginUsername.sendKeys(user);
-        loginPassword.sendKeys(password, Keys.ENTER);
+        getLoginUsername().sendKeys(user);
+        getLoginPassword().sendKeys(password, Keys.ENTER);
     }
 }

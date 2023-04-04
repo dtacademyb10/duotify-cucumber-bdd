@@ -18,7 +18,7 @@ Feature: Example scenarios to demo the concepts
     Given I am on the homepage of e-commerce
     Then the first promoted product price should be 34.66
 
-     @datatableDemo
+
     Scenario: Verify Dropdown options
       Given I am on the homepage
       When I click on reason for loan dropdown
@@ -27,4 +27,49 @@ Feature: Example scenarios to demo the concepts
             |Auto Loan		|
             |Personal loan	|
             |Student Loan	|
+
+
+  Scenario: User can register with valid details
+    Given the user is on the registration page
+    When the user enters the following details
+      | Name 		| John Smith 		|
+      | Email 		| john@example.com 	|
+      | Password 	| password123 		|
+
+    And the user clicks the submit button
+    Then the user is registered successfully
+
+
+
+    Scenario: Datatable example
+
+      Given I have the following info
+        | Annie M. G. | Schmidt  | 1911-03-20 |
+        | Roald       | Dahl     | 1916-09-13 |
+        | Astrid      | Lindgren | 1907-11-14 |
+
+
+
+  Scenario: Datatable example
+
+    Given I have the following info as List of Maps
+
+        | Annie M. G. | Schmidt  | 1911-03-20 |
+        | Roald       | Dahl     | 1916-09-13 |
+        | Astrid      | Lindgren | 1907-11-14 |
+
+
+  @datatableDemo
+  Scenario: Datatable example
+
+    Given I have the following info as Map
+
+      | KMSY | 29.993333 | -90.258056  |
+      | KSFO | 37.618889 | -122.375000 |
+      | KSEA | 47.448889 | -122.309444 |
+      | KJFK | 40.639722 | -73.778889  |
+
+
+
+
 

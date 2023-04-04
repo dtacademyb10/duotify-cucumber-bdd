@@ -5,6 +5,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.AlbumDetailsPage;
 import pages.HomePage;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -29,9 +30,11 @@ public class AlbumStepDefs {
 
 
 
-        Assert.assertEquals( (String) (dataTable.get(0)), actualAlbumName);
-        Assert.assertEquals(  (dataTable.get(1)), actualArtistName);
-        Assert.assertEquals(  (dataTable.get(2)), actualSongCount);
+        assertEquals( (String) (dataTable.get(0)), actualAlbumName);
+        assertEquals(  (dataTable.get(1)), actualArtistName);
+        assertEquals(  (dataTable.get(2)), actualSongCount);
+        assertTrue(  true);
+        assertNotEquals(  (dataTable.get(2)), actualSongCount);
 
     }
 
