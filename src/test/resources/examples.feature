@@ -73,3 +73,25 @@ Feature: Example scenarios to demo the concepts
 
 
 
+
+  @sc_outline
+  Scenario Outline: Login with valid credentials
+
+    Given I am on the login page
+    When I enter username "<username>" and password "<pass>"
+    And I click on the login button
+    Then I should see the dashboard page
+
+    Examples:
+      | username       | pass       |
+      | duotech2023    | duotech    |
+      | johnnycash2023 | johnnycash |
+      | stevejobs2023  | stevejobs  |
+
+
+
+
+
+
+
+

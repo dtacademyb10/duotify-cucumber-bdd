@@ -8,6 +8,7 @@ import pages.HomePage;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Map;
 
 public class AlbumStepDefs {
 
@@ -37,5 +38,30 @@ public class AlbumStepDefs {
         assertNotEquals(  (dataTable.get(2)), actualSongCount);
 
     }
+
+    @Then("the album should have the following info")
+    public void the_album_should_have_the_following_info(Map<String,String > dataTable) {
+
+        AlbumDetailsPage albumDetailsPage = new AlbumDetailsPage();
+        String actualAlbumName = albumDetailsPage.getAlbumName().getText();
+        String actualArtistName = albumDetailsPage.getArtistName().getText().substring(3);
+        String actualSongCount = albumDetailsPage.getSongCount().getText().split(" ")[0];
+
+
+
+        assertEquals( dataTable.get("Name"), actualAlbumName);
+        assertEquals(  (dataTable.get("Artist")), actualArtistName);
+        assertEquals(  (dataTable.get("SongCount")), actualSongCount);
+
+    }
+
+    @Then("the album songs should have the following info")
+    public void the_album_songs_should_have_the_following_info(List<List<String>> dataTable) {
+
+
+        Assert.assertEquals(dataTable, new AlbumDetailsPage().getSongInfoAsList());
+
+    }
+
 
 }

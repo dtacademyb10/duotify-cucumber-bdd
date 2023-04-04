@@ -12,6 +12,17 @@ Feature: Login Page
     When the user enters valid username as "duotech2020" and password as "duotech2020"
     Then the user is redirected to the home page
 
+  @login_sc_outline
+  Scenario Outline: User successfully logs in with valid credentials
+    Given the user is on the login page
+    When the user enters valid username as "<username>" and password as "<pass>"
+    Then the user is redirected to the home page
+
+    Examples:
+      | username       | pass       |
+      | duotech2023    | duotech    |
+      | johnnycash2023 | johnnycash |
+      | stevejobs2023  | stevejobs  |
 
 
 #  Scenario: User enters invalid credentials
