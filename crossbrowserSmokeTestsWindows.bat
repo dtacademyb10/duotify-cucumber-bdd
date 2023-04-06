@@ -1,3 +1,3 @@
-call mvn test -D cucumber.filter.tags="@smoke" -D env=QA -D browser=chrome
-call mvn test -D cucumber.filter.tags="@smoke" -D env=QA -D browser=edge
-call mvn test -D cucumber.filter.tags="@smoke" -D env=QA -D browser=firefox
+call mvn test -D cucumber.filter.tags="@smoke" -D env=QA -D browser=chrome -D cucumber.plugin="html:target/basic-report/reportChrome.html"
+call mvn test -D cucumber.filter.tags="@smoke" -D env=QA -D browser=edge -D cucumber.plugin="html:target/basic-report/reportEdge.html"
+call mvn test -D cucumber.filter.tags="@smoke" -D env=QA -D browser=firefox -D cucumber.plugin="html:target/basic-report/reportFirefox.html"
