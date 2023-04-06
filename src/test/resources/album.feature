@@ -12,6 +12,7 @@ Feature: Album features
       | 1            |
 
 
+    @singleAlbum
   Scenario: Verify album details
     Given the user is on the homepage of the music streaming app
     When the user clicks on the album "Escape"

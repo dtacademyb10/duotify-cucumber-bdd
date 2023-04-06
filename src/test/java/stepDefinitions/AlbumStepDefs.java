@@ -2,6 +2,7 @@ package stepDefinitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import pages.AlbumDetailsPage;
 import pages.HomePage;
@@ -48,10 +49,16 @@ public class AlbumStepDefs {
         String actualSongCount = albumDetailsPage.getSongCount().getText().split(" ")[0];
 
 
+//        Assert.assertEquals( dataTable.get("Name"), actualAlbumName);
+//        Assert.assertEquals(  (dataTable.get("Artist")), actualArtistName);
+//        Assert.assertEquals(  (dataTable.get("SongCount")), actualSongCount);
 
-        assertEquals( dataTable.get("Name"), actualAlbumName);
-        assertEquals(  (dataTable.get("Artist")), actualArtistName);
-        assertEquals(  (dataTable.get("SongCount")), actualSongCount);
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(dataTable.get("Name")).isEqualTo(actualAlbumName);
+        softAssertions.assertThat(dataTable.get("Artist")).isEqualTo(actualArtistName);
+        softAssertions.assertThat(dataTable.get("SongCount")).isEqualTo(actualSongCount);
+
+        softAssertions.assertAll();
 
     }
 

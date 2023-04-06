@@ -135,3 +135,14 @@ What is the difference between Cucumber Data Table and Scenario Outline's Exampl
 Data Table belongs to a single step of a scenario whereas Examples table belongs to the entire Scenario Outline.
 We use Data Table when we want to pass table-style data (multiple sets of data) into a single step.
 We use Examples table with Cucumber Scenario Outline when we want to run the same scenario multiple times with different input.
+
+
+
+Cucumber comes with built-in Junit 4 by default and it does not have soft assertions.
+Hence we can use AssertJ library to implement soft assertions:
+           Ex:
+                SoftAssertions softAssertions = new SoftAssertions();
+                softAssertions.assertThat("actual").isEqualTo("expected");
+                softAssertions.assertThat("actual2").isEqualTo("expected2");
+                softAssertions.assertThat("actual3").isEqualTo("expected3");
+                softAssertions.assertAll();
