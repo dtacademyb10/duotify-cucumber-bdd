@@ -4,7 +4,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import pages.LoginPage;
 import pages.SignUpPage;
+import utils.ConfigReader;
 import utils.Driver;
 import utils.SeleniumUtils;
 
@@ -90,5 +92,7 @@ public class SignUpStepDefs {
         SeleniumUtils.waitForVisibility(new SignUpPage().getAlreadyUsedEmailErrorMessage(), 5);
         Assert.assertTrue(new SignUpPage().getAlreadyUsedEmailErrorMessage().isDisplayed());
     }
+
+
 
 }

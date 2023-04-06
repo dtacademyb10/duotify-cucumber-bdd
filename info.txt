@@ -80,3 +80,58 @@ When you pass the tags through CMD with -D cucumber.filter.tags, it will overrid
 Lombok is used to reduce boilerplate code for classes, e.g., it can generate getters and setters for those objects automatically by using Lombok annotations.
 The easiest way is to use the @Data annotation.
 In our Framework we used Lombok annotation @Data for our Page classes to automatically generate getter methods to be accessible outside in our Test code.
+
+
+Cucumber Data Table - a cucumber feature that enables table-style data to be passed from a SINGLE step of a Cucumber scenario
+                                into the step definition method
+
+             Example:           Given I am on homepage
+                                When I pass this information
+                                | John | Doe | 12/09/1999 | 235-345-1234 | 322-09-6322 | 123 Main St, Vienna VA 22056 |
+
+              The DataTable is added to the cucumber step definition method as a parameter, we simply need to replace it with corresponding
+              Java data structure for automatic transformation. The allowed types are List<E>, List<List<E>>, List<Map<K,V>>,
+               Map<K,V>  Map<K, List<V>> where E,K,V must be a String, Integer, Float, Double, Byte, Short, Long
+
+           When Cucumber converts the DataTable into corresponding Java data structures (List, Map), it creates
+           unmodifiable versions of these data structures.
+           If you need to modify, you need to convert into a modifiable type.
+
+
+DocString
+
+If you need to specify information in a scenario that won't fit on a single line, you can use a DocString. (""" """)
+       When you use a doctring make sure to put each triple quote on its own line.
+       Ex: Scenario: Example scenario for Database
+           When I send the following query
+             """
+                select first_name,last_name,email,address,district,city,country from customer
+                join address
+                on customer.address_id = address.address_id
+                join city
+                on address.city_id  = city.city_id
+                join country
+                on city.country_id = country.country_id;
+              """
+
+
+
+What are some common Cucumber exceptions?
+
+           UndefinedStepException -  when a scenario step does not have matching step definition method
+
+           PendingException - default exception that added to each step definition snippet
+
+           AmbiguousStepDefinitionsException - this happens when one step has more than one matching step definitions
+
+           DuplicateStepDefinitionException - happens when there are more than one step definitions with the exactly matching text
+
+           CucumberException: Could not convert arguments for step [I pass this information] defined at - happens when setep definition parameter
+                              type does not match the datatable
+
+
+What is the difference between Cucumber Data Table and Scenario Outline's Examples table?
+
+Data Table belongs to a single step of a scenario whereas Examples table belongs to the entire Scenario Outline.
+We use Data Table when we want to pass table-style data (multiple sets of data) into a single step.
+We use Examples table with Cucumber Scenario Outline when we want to run the same scenario multiple times with different input.

@@ -95,4 +95,45 @@ public class ExampleStepDefs {
         System.out.println(dataTable.get("KJFK").get(1));
     }
 
+    @Given("I am connected to the db")
+    public void i_am_connected_to_the_db() {
+
+    }
+    @When("I send the following sql query")
+    public void i_send_the_following_sql_query(String docString) {
+        System.out.println(docString);
+    }
+
+    @Given("I am on the login page")
+    public void i_am_on_the_login_page() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @When("I enter username {string} and password {string}")
+    public void i_enter_username_and_password(String string, String string2) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @When("I click on the login button")
+    public void i_click_on_the_login_button() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+    @Then("I should see the dashboard page")
+    public void i_should_see_the_dashboard_page() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("I should have {double} value")
+    public void i_should_have_value(Double double1) {
+
+    }
+
+    @Then("I should have {float} valuecv")
+    public void i_should_have_value1(Float double1) {
+
+    }
+
+
 }

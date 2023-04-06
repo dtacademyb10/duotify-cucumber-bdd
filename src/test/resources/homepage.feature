@@ -42,6 +42,43 @@ Feature: Music Streaming App Homepage
     Given the user is on the homepage of the music streaming app
     When the user selects the song "Marisa" from the album "Marisa" the user clicks on the play button
     Then the song "Marisa" should start playing
+
+
+  @homepage2
+  Scenario Outline: User plays a song from an album with multiple songs
+    Given the user is on the homepage of the music streaming app
+    When the user selects the song "<song>" from the album "<album>" the user clicks on the play button
+    Then the song "<song>" should start playing
+
+    Examples: Songs and albums list
+      | song      | album     |
+      | El Amante | Fenix     |
+      | Ultimatum | Ultimatum |
+      | Salty Dub | Clouds    |
+      | Escape    | Escape    |
+      | Hero      | Escape    |
+      | Whirls    | Werk      |
+
+
+ @defaultAlbums
+  Scenario: Default albums
+    Given the user is on the homepage of the music streaming app
+    When the user clicks on the "Browse" link in the sidebar
+    Then the following albums should be displayed
+      | Cruel Summer        |
+      | Fenix               |
+      | Werk                |
+      | Marisa              |
+      | Escape              |
+      | Ultimatum           |
+      | Oscillation         |
+      | Clouds              |
+      | I Am...Sasha Fierce |
+
+
+
+
+
 #
 #
 #  Scenario Outline: User plays a given song from given album

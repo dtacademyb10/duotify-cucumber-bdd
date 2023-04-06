@@ -89,6 +89,30 @@ Feature: Example scenarios to demo the concepts
       | stevejobs2023  | stevejobs  |
 
 
+    @docString
+    Scenario: Test  the db
+      Given I am connected to the db
+      When I send the following sql query
+           """
+            Use new_schema3;
+            Create table locationsPractice3(
+            City varchar(45),
+            State varchar(45),
+            Zip_Code varchar(45),
+            vin_number varchar(45),
+            years int(45),
+            Primary key (City)
+            );
+            Insert InTo locationsPractice3(City, State, Zip_Code, vin_number, years)
+            values( 'Fairfax', 'VA', '22030', '92',1788888),
+            ('blahblah','hg','22222','928177123627',123);
+            Select * from locationspractice3;
+           """
+      Then I should have 3.5 value
+
+
+
+
 
 
 

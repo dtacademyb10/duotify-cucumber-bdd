@@ -11,6 +11,11 @@ import utils.ConfigReader;
 import utils.Driver;
 import utils.SeleniumUtils;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 public class HomePageStepDefs {
 
     @Given("the user is on the homepage of the music streaming app")
@@ -60,6 +65,20 @@ public class HomePageStepDefs {
     @Then("the song {string} should start playing")
     public void the_song_should_start_playing(String currentSong) {
           Assert.assertEquals(currentSong,new HomePage().getCurrentlyPlayingSongText());
+    }
+
+
+    @Then("the following albums should be displayed")
+    public void the_following_albums_should_be_displayed(List<String> expectedAlbums) {
+
+        List<String> modifieable = new ArrayList<>(expectedAlbums);
+        Collections.sort(modifieable);
+
+      List<String> actualAlbums =  SeleniumUtils.getElementsText(new HomePage().getAlbums());
+
+      Collections.sort(actualAlbums);
+
+      Assert.assertEquals(modifieable, actualAlbums);
     }
 
 }
