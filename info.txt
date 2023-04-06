@@ -146,3 +146,46 @@ Hence we can use AssertJ library to implement soft assertions:
                 softAssertions.assertThat("actual2").isEqualTo("expected2");
                 softAssertions.assertThat("actual3").isEqualTo("expected3");
                 softAssertions.assertAll();
+
+
+Parallel and cross-browser tests can be implemented in following ways:
+1. Selenium Grid: server that automatically runs your tests in distributed mode on multiple browsers,operating systems, platforms
+   Requires complex installation and configuration.
+   I used Selenium Grid by sending the framework tests to a remote server url using RemoteWebDriver.
+2. Using third-party cloud providers such as SauceLabs, BrowserStack.
+   Requires subscription and costs money.
+3. Implement running cross-browser and parallel tests natively in your framework.
+   Requires powerful server to run the tests.
+
+
+
+ How to implement parallelism in Cucumber framework?
+
+ We can enable parallel test in Cucumber natively with JUnit.
+
+ But we need to remember that with this option you can run only FEATURES in parallel.
+
+  If there is a need for running SCENARIOS in parallel, you can incorporate TestNG , but that requires extra configuration and setup.
+
+
+               Steps to implement running parallel Features in Cucumber with Junit:
+
+                1.Give the scope of the feature files that you want to run in parallel in your runner class
+                     features = "src/test/resources"
+                  Optionally create a separate folder for feature files that you want to run in parallel and indicate that path
+                        features = "src/test/resources/parallel"
+
+                2.Add these 2 options under the <configuration> tag of Maven Surefire plugin:
+                       <parallel>methods</parallel>
+                       <useUnlimitedThreads>true</useUnlimitedThreads>
+
+                3. If you want to limit the threads:
+                  <parallel>methods</parallel>
+                   <threadCount>6</threadCount>
+
+                4. Run the tests thru command line with mvn test command
+
+
+
+                TDD (Test Driven Development) - TestNG based framework
+                BDD (Behavior Driven Development) - Cucumber+Junit based framework
