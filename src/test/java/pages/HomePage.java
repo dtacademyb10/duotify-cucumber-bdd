@@ -10,11 +10,9 @@ import utils.SeleniumUtils;
 
 import java.util.List;
 
-public class HomePage {
+public class HomePage extends BasePage{
 
-    public HomePage(){
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
+
     @FindBy(xpath = "//div[@class='gridViewItem']//span")
     private List<WebElement> albums;
 

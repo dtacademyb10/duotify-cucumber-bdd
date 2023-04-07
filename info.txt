@@ -189,3 +189,78 @@ Parallel and cross-browser tests can be implemented in following ways:
 
                 TDD (Test Driven Development) - TestNG based framework
                 BDD (Behavior Driven Development) - Cucumber+Junit based framework
+
+
+
+  Tell me about your framework?
+
+  General description -> components -> architecture -> more details (packages, classes)
+
+
+  It is a Cucumber BDD test automation framework allows us to write test cases in Gherkin format
+  as Cucumber scenarios which is understandable to all participants. The framework tech stack includes Java, Cucumber, Gherkin, JUnit, Selenium, Maven, Faker, Lombok, AssertJ.
+  My framework is built with using Page Object Model design pattern for easy maintenance and scalability. Besides, I also used Page Factory pattern for my page classes and Singleton pattern for my Driver class.
+  My framework structure consists of packages for page classes, runner classes, step definition classes and hooks, utilities and features files. In my framework the cucumber feature files are
+  connected to the step definition classes through a runner class where all test run configuration is added.
+
+
+  Cucumber BDD Framework components:
+    Java - programming language to write code
+    Selenium - to automate UI scenarios
+    Junit - organize, configure, and execute tests
+    Maven - define the project structure, manage dependencies, run tests through command line
+    Faker - generate mock data for data driven testing
+    Lombok - generate getter and setters automatically for page classes
+    AssertJ - enable soft assertions since Junit does not offer them
+    .gitignore file - to exclude non-project related files from being version controlled (tracked and pushed to GitHub)
+    config.properties file - to store project's global variables such as env variables, usernames, passwords, paths, etc.
+    Utility Classes - classes that support our automated tests
+    Reports - are implemented with Cucumber's own built in HTML
+
+
+  Architecture:
+       -Design patterns used: Page Object Model and Page Factory, Singleton
+       -OOP Principles used:
+       - Encapsulation - I used it my page classes by making webelements private and provide public getters
+       - Inheritance - I used it in my page classes by creating a parent class and adding all common webelements there and extending subclasses from that super class
+       - I haven't implemented Abstraction or Polymorphism in any of my code since I had no need for them. But I can give you examples of them in my framework code.
+         Polymorphism ->  WebDriver driver = new ChromeDriver()
+         Abstraction -> WebDriver, WebElement, Alert, JavaScriptExecutor, TakesScreenshot
+
+  Types of tests the framework supports:
+    Functional,
+    Smoke,
+    Regression,
+    Integration,
+    UI, API, DB
+    Cross Browser,
+    Headless,
+    Parallel,
+    Data-Driven tests
+    End-to-end tests
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -57,9 +57,10 @@ public class Hooks {
             }
         }else{
             Driver.getDriver().get(ConfigReader.getProperty("QA"));
-            Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-            Driver.getDriver().manage().window().maximize();
         }
+
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        Driver.getDriver().manage().window().maximize();
 
 
 
