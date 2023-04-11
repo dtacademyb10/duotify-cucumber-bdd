@@ -4,6 +4,7 @@ import io.cucumber.java.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import utils.ConfigReader;
+import utils.DBUtils;
 import utils.Driver;
 
 import java.time.Duration;
@@ -24,18 +25,19 @@ public class Hooks {
 
 //    @BeforeAll
 //    public static void setupBeforeAllScenarios(){
-//        System.out.println("Before Everything");
+//
+//        System.out.println("Connecting to DB");
 //    }
 //
 //    @AfterAll
 //    public static void tearDownAllScenarios(){
-//        // runs once after all scenarios have run
-//        System.out.println("After Everything");
+//
+//        System.out.println("Closing to DB");
 //    }
 
 
 
-    @Before () // runs before each scenario tagged with @UI
+    @Before  // runs before each scenario tagged with @UI
     public void setUpScenario(){
 
         String environment = System.getProperty("env");
@@ -68,15 +70,15 @@ public class Hooks {
 
 
 
-//    @Before ("@DB") // runs before each scenario tagged with @UI
-//    public void setUpScenarioForDbTests(){
-//        //Configuration for DB tests
-//    }
+    @Before ("@DB") // runs before each scenario tagged with @UI
+    public void setUpScenarioForDbTests(){
+        DBUtils.createConnection();
+    }
 //
-//    @After ("@DB") // runs before each scenario tagged with @UI
-//    public void tearDownScenarioForDbTests(){
-//        //Configuration for DB tests
-//    }
+    @After ("@DB") // runs before each scenario tagged with @UI
+    public void tearDownScenarioForDbTests(){
+       DBUtils.close();
+    }
 
 
     @After () // after each scenario

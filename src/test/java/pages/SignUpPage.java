@@ -67,6 +67,10 @@ public class SignUpPage {
 
 
 
+    public void clickRegister(){
+        registerButton.click();
+    }
+
 
     public void fillTheFormWithRandomData(){
         Faker faker = new Faker();
@@ -79,6 +83,24 @@ public class SignUpPage {
         String pass = faker.internet().password();
         this.password.sendKeys(pass);
         this.password2.sendKeys(pass);
+
+    }
+
+    public void fillTheFormWithRandomData(String username,
+                                          String firstName,
+                                          String lastName,
+                                          String emailAddress,
+                                          String password){
+
+        this.username.sendKeys(username);
+        this.firstName.sendKeys(firstName);
+        this.lastName.sendKeys(lastName);
+
+        this.email.sendKeys(emailAddress);
+        this.email2.sendKeys(emailAddress);
+
+        this.password.sendKeys(password);
+        this.password2.sendKeys(password);
 
     }
 

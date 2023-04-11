@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -10,7 +10,7 @@ public class LoginStepDefs {
 
     @Given("the user is on the login page")
     public void the_user_is_on_the_login_page() {
-        Driver.getDriver().get(ConfigReader.getProperty("homepage"));
+        Driver.getDriver().get(ConfigReader.getProperty("QA"));
     }
 
     @When("the user enters valid username as {string} and password as {string}")

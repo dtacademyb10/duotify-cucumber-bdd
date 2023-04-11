@@ -1,6 +1,7 @@
 package pages;
 
 
+import lombok.Data;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +10,7 @@ import utils.Driver;
 import utils.SeleniumUtils;
 
 import java.util.List;
-
+@Data
 public class HomePage extends BasePage{
 
 
@@ -23,6 +24,11 @@ public class HomePage extends BasePage{
 
     @FindBy(xpath = "//span[@class='trackName']//span")
     private WebElement currentSong;
+
+
+    @FindBy(xpath = "//button[.='USER DETAILS']")
+    private WebElement userDetailsButton;
+
 
     public String getCurrentlyPlayingSongText( ){
             return currentSong.getText();
