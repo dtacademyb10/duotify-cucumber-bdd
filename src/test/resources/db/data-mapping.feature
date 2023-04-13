@@ -1,7 +1,7 @@
 @DB
 Feature: Verify data mapping
 
-  @db_data-mapping
+
   Scenario: Verify data mapping of playlist creation
     Given the user is on the login page
     When the user enters valid username as "duotech2023" and password as "duotech"
@@ -12,5 +12,15 @@ Feature: Verify data mapping
     Then the data should be mapped correctly to the following columns in the "playlists" table:
       |  name          |
       |  owner         |
+
+  @db_data-mapping
+  Scenario: Verify data mapping of user registration process
+    Given the user is on the sign-up page
+    When the user enters the following data in the registration form and clicks sign up:
+      | username     | first_name | last_name | email                | password   |
+      | johndoe2023  | John       | Doe       | john.doe@example.com | password123|
+    Then the data should be mapped correctly to the following columns in the table users:
+      | username     | first_name | last_name | email                | password   |
+      | johndoe2023  | John       | Doe       | john.doe@example.com | password123|
 
 

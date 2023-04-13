@@ -57,6 +57,14 @@
             <version>2.11.0</version>
         </dependency>
 
+<!--        For DigestUtils class -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+        </dependency>
+
+
         <!--    to generate getters and setters automatically for our Page classes-->
         <dependency>
             <groupId>org.projectlombok</groupId>

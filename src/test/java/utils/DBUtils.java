@@ -120,4 +120,14 @@ public class DBUtils {
         }
         return rowCount;
     }
+
+
+    public static List<String> getSingleColumnValues(String columnName, String tableName ){
+        List<String> list =  new ArrayList<>();
+        for (Map<String, Object> row : getListOfMaps("SELECT "+columnName+" from "+tableName+"")) {
+            list.add((String)(row.get(columnName)));
+        }
+
+        return list;
+    }
 }

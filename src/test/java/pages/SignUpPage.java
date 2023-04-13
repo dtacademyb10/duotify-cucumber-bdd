@@ -72,7 +72,7 @@ public class SignUpPage {
     }
 
 
-    public void fillTheFormWithRandomData(){
+    public void fillTheFormWithData(){
         Faker faker = new Faker();
         username.sendKeys(faker.name().username());
         firstName.sendKeys(faker.name().firstName());
@@ -86,11 +86,11 @@ public class SignUpPage {
 
     }
 
-    public void fillTheFormWithRandomData(String username,
-                                          String firstName,
-                                          String lastName,
-                                          String emailAddress,
-                                          String password){
+    public void fillTheFormWithData(String username,
+                                    String firstName,
+                                    String lastName,
+                                    String emailAddress,
+                                    String password){
 
         this.username.sendKeys(username);
         this.firstName.sendKeys(firstName);

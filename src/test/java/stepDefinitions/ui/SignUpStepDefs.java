@@ -4,9 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import pages.LoginPage;
 import pages.SignUpPage;
-import utils.ConfigReader;
 import utils.Driver;
 import utils.SeleniumUtils;
 
@@ -22,7 +20,7 @@ public class SignUpStepDefs {
     @When("the user enters valid information including username, first name, last name, email, confirm email, password, and confirm password")
     public void the_user_enters_valid_information_including_first_name_last_name_email_password_and_confirm_password() {
 
-     new SignUpPage().fillTheFormWithRandomData();
+     new SignUpPage().fillTheFormWithData();
 
     }
     @When("^clicks on the sign-up button$")

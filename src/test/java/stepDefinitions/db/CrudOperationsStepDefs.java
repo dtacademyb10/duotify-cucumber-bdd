@@ -28,7 +28,7 @@ public class CrudOperationsStepDefs {
          last = faker.name().lastName();
          email = faker.internet().emailAddress();
         String password = faker.internet().password();
-        new SignUpPage().fillTheFormWithRandomData(expectedUsername, first, last ,email,password);
+        new SignUpPage().fillTheFormWithData(expectedUsername, first, last ,email,password);
         new SignUpPage().clickRegister();
 
     }
