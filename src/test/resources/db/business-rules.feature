@@ -2,7 +2,7 @@
 Feature: Verify database related business rules
 
 
-  @business_rule
+  @db_only
   Scenario: Verify the pre-defined genres in the database
     When  I send a request to retrieve genres from genres table
     Then It should be the following genres
@@ -19,7 +19,7 @@ Feature: Verify database related business rules
       | reggaeton  |
       | rap        |
 
-  @business_rule
+  @db_only
   Scenario: Verify the column names for albums table
     When I send a request to retrieve column names for albums table
     Then It should be the following
@@ -29,7 +29,7 @@ Feature: Verify database related business rules
       | genre       |
       | artworkPath |
 
-
+  @db_only
   Scenario: Verify the duplicate usernames
     When  I send a request to retrieve usernames
     Then  the result should contain duplicates
