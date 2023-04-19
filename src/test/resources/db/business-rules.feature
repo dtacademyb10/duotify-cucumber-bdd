@@ -30,16 +30,17 @@ Feature: Verify database related business rules
       | artworkPath |
 
 
+ @db_only
   Scenario: Verify the duplicate usernames
     When  I send a request to retrieve usernames
     Then  the result should contain duplicates
 
 
-
+@db_only
   Scenario: Verify the duplicate usernames
     When  I send a request to retrieve duplicate usernames
     Then  The result should be empty
 
-#
+
 
 
