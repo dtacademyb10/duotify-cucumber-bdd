@@ -51,7 +51,7 @@ public class SignUpPage {
     @FindBy (id = "password2")
     private WebElement password2;
 
-    @FindBy (name = "registerButton")
+    @FindBy (name = "registerButton1")
     private WebElement registerButton;
 
     public WebElement getEmailErrorMessage() {
