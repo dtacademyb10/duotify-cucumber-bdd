@@ -19,7 +19,7 @@ Feature: Verify database related business rules
       | reggaeton  |
       | rap        |
 
-  @db_only @regression
+  @db_only
   Scenario: Verify the column names for albums table
     When I send a request to retrieve column names for albums table
     Then It should be the following

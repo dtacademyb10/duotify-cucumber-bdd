@@ -1,4 +1,4 @@
-@DMT-4 @regression
+@DMT-4
 Feature: Sign Up feature
 
   As a potential customer, I should be able to use the sign up page and create and account to be able to stream music
@@ -26,7 +26,7 @@ Feature: Sign Up feature
     Then the user should see an error message for password
     And the sign-up process should not proceed
 
-
+ @regression
   Scenario: User password and confirm password do not match
     When the user enters a password and enters a different password in the confirm password field
     And clicks on the sign-up button
