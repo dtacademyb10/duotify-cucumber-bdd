@@ -47,10 +47,13 @@ public class Driver {
                     drivers.set(new ChromeDriver(chromeOptions));
                     break;
                 case "edge":
-                    drivers.set(new EdgeDriver());
+                    EdgeOptions edgeOptions1 = new EdgeOptions();
+                    edgeOptions1.addArguments("--remote-allow-origins=*");
+                    drivers.set(new EdgeDriver(edgeOptions1));
                     break;
                 case "headlessEdge":
                     EdgeOptions edgeOptions = new EdgeOptions();
+                    edgeOptions.addArguments("--remote-allow-origins=*");
                     edgeOptions.addArguments("--headless");
                     drivers.set(new EdgeDriver(edgeOptions));
                     break;

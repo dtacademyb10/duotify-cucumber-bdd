@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 //        you could combine any number or type of tags -> "@positive and @signUp or @smoke"
         // omitting tags entirely will run everything under the given path in features, you could use it to run regression
 
-        tags = "@db_only",
+        tags = "@regression",
 //
 
         features = "src/test/resources", // the path where all feature files are located
