@@ -5,4 +5,5 @@
 /out
 /target
 /bin
+config.properties
 #to remove unwanted folders or files retroactively  -> git rm -r --cached <folder or file name>
