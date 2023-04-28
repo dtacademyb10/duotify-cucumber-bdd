@@ -1,0 +1,11 @@
+username=your_username_here
+password=your_password_here
+browser=browser_here
+QA=qa_env_link_here
+STAGING=staging_env_link_here
+DEV=dev_env_link_here
+db_url=db_url_here
+db_username=db_password_here
+db_password=db_password_here
+api_base_uri=your_api_base_uri_here
+api_key=your_api_key_here
