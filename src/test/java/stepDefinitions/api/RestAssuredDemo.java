@@ -1,9 +1,11 @@
 package stepDefinitions.api;
 
 
+import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Test;
+import utils.ConfigReader;
 
 import java.util.Random;
 
@@ -17,9 +19,6 @@ public class RestAssuredDemo {
 
 
 
-    public void testEnvVariables(){
-
-    }
 
 
 
@@ -69,7 +68,7 @@ public class RestAssuredDemo {
         String id = "46";
         given().
                 queryParam("id", id).
-                queryParam("api_key","e82042a5f58f449c9d5a9e3cf5a3f43b").
+                queryParam("api_key",ConfigReader.getProperty("api_key")).
         when().log().all().
                 get("/user").
         then().log().all().
@@ -92,24 +91,47 @@ public class RestAssuredDemo {
         baseURI = "http://duotify.us-east-2.elasticbeanstalk.com/api";
 
 
-        given().
+        String username = new Faker().name().username();
+        String email = new Faker().internet().emailAddress();
 
-                queryParam("api_key","e82042a5f58f449c9d5a9e3cf5a3f43b").
+        Response response = given().
+
+                queryParam("api_key", ConfigReader.getProperty("api_key")).
                 body("{\n" +
-                        "  \"username\": \"coolhefdsrsaac"+new Random().nextInt(1000000)+"\",\n" +
+                        "  \"username\": \"" + username + "\",\n" +
                         "  \"firstName\": \"Cool\",\n" +
                         "  \"lastName\": \"Herc\",\n" +
-                        "  \"email\": \"hedsfsdrc@mail.com"+new Random().nextInt(1000000)+"\",\n" +
-                        "  \"password\": \"dhsjjfhdsf\"\n" +
+                        "  \"email\": \"" + email + "\",\n" +
+                        "  \"password\": \"pass\"\n" +
                         "}").
-        when().log().all().
+                when().log().all().
                 post("/user").
-        then().log().all().
+                then().log().all().
                 assertThat().
                 statusCode(201).
                 body("message", is("The user has been created.")).
+                body("status", is(1)).
+                header("Content-Type", "application/json").
+                time(lessThan(1000L)).extract().response();
+
+        Integer userId = response.path("user_id");
+
+        // Verify user creation by sending a get request to obtain the info about the user that is just created
+        given().
+                queryParam("api_key", ConfigReader.getProperty("api_key")).
+                queryParam("id", userId).
+                when().log().all().
+                get("/user").
+                then().log().all().
+                assertThat().
+                statusCode(200).
+                body("username", equalTo(username)).
+                body("email", is(email)).
                 header("Content-Type", "application/json").
                 time(lessThan(1000L));
+
+
+
 
     }
 
