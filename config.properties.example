@@ -9,3 +9,4 @@ db_username=db_password_here
 db_password=db_password_here
 api_base_uri=your_api_base_uri_here
 api_key=your_api_key_here
+#add a new file to your project level named config.properties and paste the above and replace the dummy values with real data
