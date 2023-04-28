@@ -16,7 +16,14 @@ public class RestAssuredDemo {
 
 
 
-    @Test
+
+    public void testEnvVariables(){
+
+    }
+
+
+
+        @Test
     public void basicDemo(){
 
         // 1. Set the base URI

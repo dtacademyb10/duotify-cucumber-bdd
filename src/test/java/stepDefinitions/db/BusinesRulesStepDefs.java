@@ -13,7 +13,6 @@ public class BusinesRulesStepDefs {
     @When("I send a request to retrieve genres from genres table")
     public void i_send_a_request_to_retrieve_genres_from_genres_table() {
 
-
        actual = DBUtils.getSingleColumnValues("name", "genres");
 
 

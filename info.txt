@@ -242,7 +242,44 @@ Parallel and cross-browser tests can be implemented in following ways:
 
 
 
+How to manage sensitive data on a collaborative project?
 
+
+When collaborating on a project, you should never commit sensitive data, such as API keys or passwords, to the source code repository.Here are the some solutions to handle this:
+
+
+1. Use a .gitignore file along with an example configuration file.
+The .gitignore file is a text file that tells Git which files or folders to ignore in a project. You can add config.properties to the .gitignore file, and this file won't be tracked by Git.
+Then add and commit an example configuration file into the repository, named something like 'config.properties.example', which includes all the keys your application needs but with empty or placeholder values. This way, other developers know what keys they need to provide, but the sensitive information is not exposed. Sample config.properties.example file:
+
+    username=your_username_here
+    password=your_password_here
+    browser=browser_here
+    QA=qa_env_link_here
+    STAGING=staging_env_link_here
+    DEV=dev_env_link_here
+    db_url=db_url_here
+    db_username=db_password_here
+    db_password=db_password_here
+    api_base_uri=your_api_base_uri_here
+    api_key=your_api_key_here
+ When others clone the repository, they should create a real config.properties file locally, copy the config.properties.example file content to config.properties and replace your_{credential}_here with their actual credentials.
+
+
+
+2. Another common practice is to store sensitive information in environment variables either directly in the operating system settings or in IDE Run settings. This keeps sensitive data out of your code altogether. In your code, you would then access these values using the appropriate syntax for your programming language like System.getenv("envVarName") in Java;
+
+Set environment variables in IntelliJ:
+
+    - From the main menu, select Run -> Edit Configurations.
+    - In the Environment variables field and click the page button next to it.
+    - In the Environment Variables dialog, click the plus (+) button to add a new environment variable.
+    - Enter the names and values of the environment variables, then click OK.
+    - Click OK in the Run/Debug Configurations dialog to save your changes.
+
+    Now, every time you run your application using this run configuration, IntelliJ IDEA will set the environment variables for the duration of the run session.
+
+3. For a more secure and robust solution, especially for larger projects or organizations, secrets management tool or service such as AWS Secrets Manager, Azure Key Vault, or Google Cloud Secret Manager can be used.
 
 
 
