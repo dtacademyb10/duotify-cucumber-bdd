@@ -240,6 +240,163 @@ Parallel and cross-browser tests can be implemented in following ways:
     End-to-end tests
 
 
+Branching in Git -> creating a new development line without affecting the main line
+
+git branch -> shows you the available branches AND which branch you are currently at
+git branch <nameOfBranch> -> git branch newFeature  -  creates a new branch from the current main branch (creates a copy)
+git checkout <nameOfBranch> -> git checkout newFeature  - switches to a new branch
+git merge <branchThatNeedsToBeMerged> git merge newFeature -> merges changes from one branch to another (you need to be in main branch to merge changes from the newFeature branch)
+git branch -D <nameOfBranch>  -> git branch -D user-story-003 -> deletes the branch (you need to be in a different branch to delete it)
+
+
+Merge conflict:
+
+<<<<<<< HEAD
+        System.out.println("Hi");        // anything between HEAD and =======
+        Integer y = 0;                    // my changes
+        y++;
+=======
+        System.out.println("Bonjour");
+        double x = 0;     					// anything between ======= and >>>>>>>
+        x++;                               // other person's changes
+>>>>>>> 42363243hes32g4g32g32gg2h3
+
+To resolve the merge conflict, remove the extra lines (<<<<<<< HEAD , =======, >>>>>>> 42363243hes32g4g32g32gg2h3 )
+choose which version to keep, and make sure to create a new commit to resolve the merge conflict
+
+
+Merge conflicts can occur when:
+1. The lines of the same file is changed by two people
+2. When one person deletes the file, where other person adds a change
+3. Two people create a new file with the same name
+
+To prevent merge conflicts, in general avoid working on the same files, like same java classes.
+
+
+
+How to collaborate on a project using GitHub workflow (branch-based workflow):
+
+1. Team lead creates a project, adds a gitignore file, starts a new git project (VCS -> Enable version control -> Git) and creates a commit and pushes it to a remote repository and gives a push access to other team members (add them as collaborators)
+2. Other team members clone the repository
+3. Everyone needs to create a new branch to avoid working in the main branch
+4. Add new changes in your own branch, commit the change, and push the branch to remote by either logging in or using a token shared by the repository owner
+5. Create a pull request for the branch code to be reviewed by others in GitHub
+6. Once the code is reviewed, the reviewer closes the pull request and merges the branch and deletes the branch
+7. The branch owner also deletes the branch locally.
+8. The  branch owner pulls the changes from remote's main to local main
+9. The  branch owner creates a new branch and repeats steps 1-8
+
+Pro Tip: To avoid merge consflicts, pull all the changes from the remote before working on any new code or creating a new branch.
+
+
+
+Environments:
+
+Typical software project contains 4 environments:
+
+DEV-> QA/TEST -> STAGING/UAT -> PROD
+
+Environments are created so that all participants(devs,qa,uat team) can do their job without interfering with each other.
+
+DEV(Development) -> Where developers work and add new features. Not stable since changes are added/removed/modified constantly
+                   https://www.dev.webstaurantstore.com/
+QA/TEST(Test) -> Where QA Team works and tests the newly deployed features from DEV environment. Stable because changes are deployed from DEV environment periodically.
+                   https://www.qa.webstaurantstore.com/
+STAGING/UAT(Staging) -> Where UAT Team/Business team works and tests final version of the feature before release. It should be the exact copy of the Production environment. Stable and changes are deployed periodically. Has all the necessary services and real data.
+                   https://www.staging.webstaurantstore.com/
+PROD(Production) -> Final version of the application that end users see.
+                   https://www.webstaurantstore.com/
+
+
+
+CI/CD Pipeline with DEVs and SDETs on the team
+
+
+ -----------------------------------------------------------------------
+| 1. Code Changes|    | 2. Build and Test |   | 3. Automated Testing   |
+|    by DEV      | -> |   Code and Unit   |-> |  (Integration and      |
+|                |    |   Testing         |   |   Regression) by SDET  |
+-----------------------------------------------------------------------
+                                                      |
+                                                      v
+
+                                       --------------------------------                      ---------->  CI
+                                       | 4a. SDET Investigates Failed |
+                                       |    Automated Tests           |
+                                       --------------------------------
+                                                      |
+                                                      v
+                                      -------------------------------------------
+                                      | 4b. Manual Review and Approval by SDET  |
+                                      |                                         |
+                                      -------------------------------------------
+ ------------------------------------------------------------------------------------------------------------------------------------------
+
+                                                      |
+                                                      v
+                                             ---------------------
+                                             | 5. Deployment to |
+                                             |    Staging      |
+                                             ---------------------
+                                                      |
+                                                      v
+                                             ---------------------
+                                             | 6. Automated     |                           ---------->  CD
+                                             |    Acceptance    |
+                                             |    Testing       |
+                                             ---------------------
+                                                      |
+                                                      v
+                                             ---------------------
+                                             | 7. Deployment to |
+                                             |    Production    |
+                                             ---------------------
+
+1. Code Changes: Developers make changes to the codebase and commit them to the shared repository.
+
+2. Build and Test Code: A CI tool automatically builds the code changes and runs DEV unit tests to check for errors or conflicts.
+
+3. Automated Testing by SDET: Automated integration and regression tests are run on the code changes.
+
+4a. SDET Investigates Failed Automated Tests: SDETs investigate any failed automated tests and provide feedback to the developers.
+4b. Manual Review and Approval by SDET: SDETs run manual and automated tests on the build, report bugs, re-test the fixed bug, and approve the build for deployment to the staging environment.
+
+5. Deploy to Staging Environment: If the build is approved by the SDETs, it is deployed to the staging environment for further testing and approval.
+
+5. Automated Acceptance Testing: Automated tests (smoke and regression) are run in the staging environment to ensure that the changes work as expected.
+
+6. Deployment to Production: If the changes pass the acceptance tests, they are deployed to the production environment, where users can access them.
+
+
+
+
+Can you explain me your team’s CI/CD pipeline?
+
+
+Our team’s CI/CD pipeline is pretty complex but I can try to describe it in simpler terms.
+
+Developers make changes and commit them to a repository. CI Server (Jenkins) automatically builds the code changes and runs DEV unit tests to check for errors and deploys the change to QA environment. QA Automated integration and regression tests are then run on the new code changes.
+If any automated tests fail, I am notified and I investigate and provide feedback to the developers. I also manually review, re-test the fixed bugs and approve the build for deployment to the staging environment. Once the build is deployed to the staging environment, automated smoke and regression tests are run to ensure that the changes work as expected. If the changes pass the automated tests, they are deployed to the production environment after a manual review.
+
+
+
+How do you participate / What’s your role in your team’s CI/CD pipeline?
+
+I work closely with developers and DevOps team to set up an efficient CI/CD pipeline to automate the entire application build, test and deployment process.
+
+I am responsible for designing and developing automated QA tests that run as part of the CI/CD pipeline, including integration tests, regression tests, and smoke  tests. These automated tests are used to identify issues and defects in the code changes made by developers, providing quick feedback to the team to resolve issues before they reach production.
+
+In addition to automated testing, I also perform manual testing to identify any issues that may not be caught by automated tests.
+
+I am also involved in the deployment process, ensuring that the code changes are deployed correctly to the staging and production environments and set up basic smoke tests to monitor the health of the application in those envirionments.
+
+
+Where do you keep your Framework code/Automated tests?
+
+We keep them in repository that is separate from developers.
+
+
+
 
 
 How to manage sensitive data on a collaborative project?

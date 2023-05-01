@@ -3,7 +3,7 @@ Feature: GET /users API endpoint features
   I want to retrieve all the users of the mortgage application
   So that I can manage and monitor the user base
 
-  @api
+
   Scenario: Retrieve all users successfully
 
     Given the request is authenticated with a valid API key
@@ -26,7 +26,7 @@ Feature: GET /users API endpoint features
     And the response time should be less than 1000 ms
 
 
-  @api
+
   Scenario: Missing api key
 
     Given the request is not authenticated with a valid API key

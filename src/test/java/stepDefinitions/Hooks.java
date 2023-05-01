@@ -4,6 +4,7 @@ import io.cucumber.java.*;
 import io.restassured.RestAssured;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import utils.ApiUtils;
 import utils.ConfigReader;
 import utils.DBUtils;
 import utils.Driver;
@@ -72,7 +73,7 @@ public class Hooks {
 
     @Before ("@api") // runs before each scenario tagged with @UI
     public void setUpScenarioForApiTests(){
-        RestAssured.baseURI = ConfigReader.getProperty("api_base_uri");
+        ApiUtils.prepareAPI();
     }
 
 

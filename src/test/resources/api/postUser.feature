@@ -1,7 +1,7 @@
 Feature: POST /user API endpoint features
 
 
-  @api
+
   Scenario: Create  new user successfully
 
     Given the request is authenticated with a valid API key
