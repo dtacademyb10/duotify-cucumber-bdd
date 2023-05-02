@@ -73,10 +73,15 @@ public class GetUsersStepDefs {
 
     }
 
-    @And("the response body key {string} should be {string}")
-    public void theResponseBodyKeyShouldBe(String key, String value) {
+    @Then("the response body key {string} should be true")
+public void the_response_body_key_should_be_true(String key) {
+        ApiUtils.verifyBasicResponseBody(key,true);
+}
 
-        ApiUtils.verifyBasicResponseBody(key, value);
+    @And("the response body key {string} should be {string}")
+    public void theResponseBodyKeyShouldBeString(String key, String value) {
+
+        ApiUtils.verifyBasicResponseBody(key,value);
 
     }
 

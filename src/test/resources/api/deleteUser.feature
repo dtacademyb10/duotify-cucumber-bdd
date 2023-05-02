@@ -1,7 +1,6 @@
 Feature: DELETE /user API endpoint features
 
 
- @api
   Scenario: Deletes a single user successfully
 
    Given the request is authenticated with a valid API key

@@ -17,6 +17,8 @@ public class ApiUtils {
     private  static  RequestSpecification requestSpecification;
     private static Response response;
 
+    private static String JWTToken;
+
 
     public static void prepareAPI() {
         RestAssured.baseURI = ConfigReader.getProperty("api_base_uri");
@@ -99,6 +101,19 @@ public class ApiUtils {
             throw new RuntimeException("Response is null. Make sure the request was sent successfully before trying to obtain response.");
         }
         return response;
+    }
+
+
+    public static void setJWTToken() {
+        JWTToken = response.path("access_token");
+    }
+
+
+    public static String getJWTToken() {
+        if(JWTToken == null){
+            throw new RuntimeException("JWT Token is required for this request. Make sure to call POST /login before this request.");
+        }
+       return JWTToken;
     }
 
 }

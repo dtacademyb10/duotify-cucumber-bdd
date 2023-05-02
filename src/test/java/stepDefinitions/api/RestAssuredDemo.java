@@ -72,20 +72,20 @@ public class RestAssuredDemo {
 
 
         String id = "46";
-        given().
+        String prettyString = given().
                 queryParam("id", id).
-                queryParam("api_key",ConfigReader.getProperty("api_key")).
-        when().log().all().
+                queryParam("api_key", ConfigReader.getProperty("api_key")).
+                when().log().all().
                 get("/user").
-        then().log().all().
+                then().log().all().
                 assertThat().
                 statusCode(200).
-                body("id",equalTo(id)).
+                body("id", equalTo(id)).
                 body("firstName", is("Duotech")).
                 header("Content-Type", "application/json").
-                time(lessThan(1000L));
+                time(lessThan(1000L)).extract().response().asPrettyString();
 
-
+        System.out.println(prettyString);
 
 
     }

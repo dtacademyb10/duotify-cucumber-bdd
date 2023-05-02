@@ -14,32 +14,9 @@ import java.time.Duration;
 public class Hooks {
 
 
-//    @BeforeStep
-//    public void beforeEachStep(){
-//        System.out.println("Before Each Step");
-//    }
-//
-//    @AfterStep
-//    public void afterEachStep(){
-//        System.out.println("After Each Step");
-//    }
 
 
-//    @BeforeAll
-//    public static void setupBeforeAllScenarios(){
-//
-//        System.out.println("Connecting to DB");
-//    }
-//
-//    @AfterAll
-//    public static void tearDownAllScenarios(){
-//
-//        System.out.println("Closing to DB");
-//    }
-
-
-
-    @Before ("not @db_only and not @api") // runs before each scenario tagged with @UI
+    @Before ("not @db_only and not @api")
     public void setUpScenario(){
 
         String environment = System.getProperty("env");
@@ -71,25 +48,34 @@ public class Hooks {
     }
 
 
-    @Before ("@api") // runs before each scenario tagged with @UI
+    @Before ("@api")
     public void setUpScenarioForApiTests(){
         ApiUtils.prepareAPI();
     }
 
 
+    @After ("@api")
+    public void tearDownScenarioForApiTests(Scenario scenario){
 
-    @Before ("@DB") // runs before each scenario tagged with @UI
+        if(scenario.isFailed()){
+            scenario.attach( ApiUtils.getResponse().asPrettyString(), "text/plain", "responseBody");
+        }
+    }
+
+
+
+    @Before ("@DB")
     public void setUpScenarioForDbTests(){
         DBUtils.createConnection();
     }
-//
-    @After ("@DB") // runs before each scenario tagged with @UI
+
+    @After ("@DB")
     public void tearDownScenarioForDbTests(){
        DBUtils.close();
     }
 
 
-    @After ("not @db_only and not @api")  // after each scenario
+    @After ("not @db_only and not @api")
     public void tearDownScenario(Scenario scenario){
         if(scenario.isFailed()){
             scenario.attach(((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES), "image/png", "screenshot");
