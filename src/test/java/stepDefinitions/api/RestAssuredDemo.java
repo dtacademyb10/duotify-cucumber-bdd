@@ -3,11 +3,15 @@ package stepDefinitions.api;
 
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.junit.Test;
 import utils.ConfigReader;
 
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -85,7 +89,39 @@ public class RestAssuredDemo {
                 header("Content-Type", "application/json").
                 time(lessThan(1000L)).extract().response().asPrettyString();
 
+        //asPrettyString(); -> returns the response body in as String in Json format
+
         System.out.println(prettyString);
+
+
+    }
+
+    @Test
+    public void testGetUsers(){
+
+
+
+
+   List all =    given().
+
+                queryParam("api_key", ConfigReader.getProperty("api_key")).
+                when().log().all().
+                get("/users").
+                then().log().all().
+                assertThat().
+                 body("[0].id", equalTo("43")).
+//                statusCode(200).extract().path("");
+                  statusCode(200).extract().path("$");
+
+
+        System.out.println(all);
+        System.out.println(all.size());
+
+
+
+
+
+
 
 
     }
@@ -315,6 +351,100 @@ public class RestAssuredDemo {
 
 
     }
+
+
+    @Test
+    public void testGpathBasics(){
+
+        baseURI = "http://api.weatherapi.com/v1";
+
+
+//        String locationName = given().
+//                queryParam("key", ConfigReader.getProperty("weather_api_key")).
+//                queryParam("q", "Fairfax VA").
+//                when().log().all().
+//                get("/current.json").
+//                then().log().all().
+//                assertThat().
+//                statusCode(200).
+//                body("location.name", equalTo("Fairfax")).
+//                time(lessThan(1000L)).extract().path("location.region");
+//
+//
+//        System.out.println(locationName);
+
+
+        JsonPath jsonPath = given().
+                queryParam("key", ConfigReader.getProperty("weather_api_key")).
+                queryParam("q", "Fairfax VA").
+                when().log().all().
+                get("/current.json").
+                then().log().all().
+                assertThat().
+                statusCode(200).
+                body("location.name", equalTo("Fairfax")).
+                body("current.condition.icon", equalTo("//cdn.weatherapi.com/weather/64x64/night/116.png")).
+                time(lessThan(1000L)).extract().jsonPath();
+
+        String country = jsonPath.getString("location.country");
+
+        System.out.println(country);
+
+        Double lat = jsonPath.getDouble("location.lat");
+
+        System.out.println(lat);
+
+        Object o = jsonPath.get("location.lon");
+
+        System.out.println(o);
+
+        Map<String, Object> location = jsonPath.getMap("location");
+
+        System.out.println(location.keySet());
+
+//        System.out.println(location.getClass());
+
+        System.out.println(location);
+
+
+        System.out.println(jsonPath.getString("current.condition.text"));
+
+
+    }
+
+    @Test
+    public void testGpathAdvanced(){
+
+        JsonPath jsonPath =  new JsonPath(new File("src/test/java/stepDefinitions/api/bookstore.json"));
+
+
+        jsonPath.prettyPrint();
+
+        System.out.println(jsonPath.getInt("id"));
+        System.out.println(jsonPath.getDouble("location.lat"));
+        System.out.println(jsonPath.getList("days_open"));
+        System.out.println(jsonPath.getString("days_open[0]"));
+        System.out.println(jsonPath.getInt("days_open.size()"));
+
+
+        List<Map<String,Object>> listOfBooks = jsonPath.getList("store.book");
+
+        System.out.println(listOfBooks);
+
+
+        Object o = jsonPath.get("store.book[1].author");
+
+        System.out.println(o);
+
+        List<String> authors= jsonPath.get("store.book.author");
+
+        System.out.println(authors);
+
+
+    }
+
+
+
 
 
 

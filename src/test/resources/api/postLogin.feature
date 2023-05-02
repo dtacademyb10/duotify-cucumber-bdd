@@ -1,5 +1,5 @@
+@api
 Feature: POST /login API endpoint features
-
 
 
   Scenario: Log in existing user successfully and generate a temporary JWT token

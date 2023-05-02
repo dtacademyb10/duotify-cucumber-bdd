@@ -1,3 +1,4 @@
+@api
 Feature: GET /users API endpoint features
   As an admin
   I want to retrieve all the users of the mortgage application
@@ -13,18 +14,17 @@ Feature: GET /users API endpoint features
     Then the response status code should be 200
     And the response "Content-Type" header should be "application/json"
     And the response should contain a list of all users with the following fields
-          |id|
-          |username|
-          |firstName|
-          |lastName|
-          |email|
-          |password|
-          |signUpDate|
-          |profilePic|
+      | id         |
+      | username   |
+      | firstName  |
+      | lastName   |
+      | email      |
+      | password   |
+      | signUpDate |
+      | profilePic |
 
     And the response should not contain any sensitive information
     And the response time should be less than 1000 ms
-
 
 
   Scenario: Missing api key

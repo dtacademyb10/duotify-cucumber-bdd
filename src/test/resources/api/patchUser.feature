@@ -1,12 +1,12 @@
+@api
 Feature: PATCH /user API endpoint features
-
 
 
   Scenario: Update the user detail successfully
 
     Given the request is authenticated with a valid API key
     And the "Content-type" header is set to "application/json"
-     And the "id" query parameter is set to "55"
+    And the "id" query parameter is set to "60"
     And the body is set to the following
      """
      {

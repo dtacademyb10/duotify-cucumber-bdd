@@ -1,0 +1,49 @@
+{ "id": 122,
+  "location": {
+     "lat": 38.77,
+     "lon": -77.19
+   },
+  "days_open" : ["Monday", "Tuesday","Wednesday","Thursday","Friday","Saturday"],
+  "store": {
+  "book": [
+    { "category": "reference",
+      "author": "Nigel Rees",
+      "title": "Sayings of the Century",
+      "price": 8.95
+    },
+    { "category": null,
+      "author": "Arthur Conan Doyle",
+      "title": "Sherlock Holmes",
+      "isbn": "0-123-23123-1",
+      "price": 40.99
+    },
+    { "category": "fiction",
+      "author": "Evelyn Waugh",
+      "title": "Sword of Honour",
+      "price": 12.99
+    },
+    { "category": "fiction",
+      "author": "Herman Melville",
+      "title": "Moby Dick",
+      "isbn": "0-553-21311-3",
+      "price": 8.99
+    },
+    { "category": "fiction",
+      "author": "J. R. R. Tolkien",
+      "title": "The Lord of the Rings",
+      "isbn": "0-395-19395-8",
+      "price": 22.99
+    },
+    { "category": null,
+      "author": "Arthur Conan Doyle",
+      "title": "Professor Moriarty",
+      "isbn": "0-123-23123-2",
+      "price": 50.99
+    }
+  ],
+  "bicycle": {
+    "color": "red",
+    "price": 19.95
+  }
+}
+}

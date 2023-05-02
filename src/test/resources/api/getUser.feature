@@ -1,5 +1,5 @@
+@api
 Feature: GET /user API endpoint features
-
 
 
   Scenario: Gets a single user successfully
