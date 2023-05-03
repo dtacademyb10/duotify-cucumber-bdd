@@ -25,6 +25,7 @@ Feature: GET /users API endpoint features
 
     And the response should not contain any sensitive information
     And the response time should be less than 1000 ms
+    And the users amount should be 1598
 
 
   Scenario: Missing api key

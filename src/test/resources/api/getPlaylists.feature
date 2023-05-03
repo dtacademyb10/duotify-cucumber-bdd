@@ -2,7 +2,7 @@
 Feature: GET /playlists API endpoint features
 
 
-
+  @temp
   Scenario: Retrieve all playlists for a specific user successfully
 
 
@@ -22,5 +22,7 @@ Feature: GET /playlists API endpoint features
     Then the response log should be displayed
     Then the response status code should be 200
     And the response time should be less than 1000 ms
+    And the owner of all playlists should be correct
+    And the all playlists should be sorted in descending order
 
 

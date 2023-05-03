@@ -1,12 +1,12 @@
 Feature: Login Page
 
-  @temp
+
   Scenario: User successfully logs in with valid credentials
     Given the user is on the login page
     When the user enters valid username as "duotech2023" and password as "duotech"
     Then the user is redirected to the home page
 
-  @temp
+
   Scenario: User successfully logs in with valid credentials
     Given the user is on the login page
     When the user enters valid username as "duotech2020" and password as "duotech2020"

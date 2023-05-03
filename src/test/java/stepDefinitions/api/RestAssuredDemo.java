@@ -444,6 +444,109 @@ public class RestAssuredDemo {
     }
 
 
+    @Test
+    public void testGpathAdvanced2(){
+
+        JsonPath jsonPath =  new JsonPath(new File("src/test/java/stepDefinitions/api/bookstore.json"));
+
+
+        jsonPath.prettyPrint();
+
+        // find the first book whose author is Arthur Conan Doyle
+        Map author = jsonPath.getMap("store.book.find { it.author == 'Arthur Conan Doyle'}");
+        System.out.println(author);
+
+        // find all books whose author is Arthur Conan Doyle
+        List allAuthors = jsonPath.getList("store.book.findAll { it.author == 'Arthur Conan Doyle'}");
+        System.out.println(allAuthors);
+
+        // find all books whose title starts with S
+        List allBooks = jsonPath.getList("store.book.findAll { it.title.startsWith('S') }");
+        System.out.println(allBooks);
+
+        // find all books whose category is null
+        List allBooksWithNullCategory = jsonPath.getList("store.book.findAll { it.category == null }");
+        System.out.println(allBooksWithNullCategory);
+
+
+        // find all books whose price is over 15
+        List allBooksWithPriceOver15 = jsonPath.getList("store.book.findAll { it.price > 15.0 }");
+        System.out.println(allBooksWithPriceOver15);
+
+        // find titles of all books whose price is over 15
+        List titleOfallBooksWithPriceOver15 = jsonPath.getList("store.book.findAll { it.price > 15.0 }.title");
+        System.out.println(titleOfallBooksWithPriceOver15);
+
+        Double minPrice = jsonPath.getDouble("store.book.price.min()");
+        System.out.println(minPrice);
+
+        Double maxPrice = jsonPath.getDouble("store.book.price.max()");
+        System.out.println(maxPrice);
+
+        Double sumPrice = jsonPath.getDouble("store.book.price.sum()");
+        System.out.println(sumPrice);
+
+        Double averagePrice = jsonPath.getDouble("store.book.price.average()");
+        System.out.println(averagePrice);
+
+
+
+        List collectDemo = jsonPath.getList("store.book.collect { \"${it.title} by ${it.author}\" }");
+        System.out.println(collectDemo);
+
+        Map collectEntriesDemo = jsonPath.getMap("store.book.collectEntries { [it.title,it.author] }");
+        System.out.println(collectEntriesDemo);
+
+
+
+
+
+
+    }
+
+
+    @Test
+
+    public void testHamcrestMatchers(){
+
+        baseURI = "http://api.weatherapi.com/v1";
+
+
+       given().
+                queryParam("key", ConfigReader.getProperty("weather_api_key")).
+                queryParam("q", "Fairfax VA").
+                queryParam("days", "7").
+                when().log().all().
+                get("/forecast.json").
+                then().log().all().
+                assertThat().
+                statusCode(200).
+                // Gpath expression    , Matcher method
+                body("location.name", equalTo("Fairfax")).
+                body("location.region", not(equalTo("New York"))).
+                body("forecast.forecastday", hasSize(7)).
+                body("forecast.forecastday", not(empty())).
+                body("location.country", notNullValue()).
+                body("location", hasKey("localtime")).
+                body("location", anyOf(hasKey("localtime"), hasKey("cdgs"), hasKey("cdbhsvgdv"))).
+                body("location", allOf(hasKey("localtime"), hasKey("lat"), hasKey("lon"))).
+                body("location", not(hasKey("password"))).
+                body("location", hasValue("America/New_York")).
+                body("location", hasEntry("region", "Virginia")).
+                body("location", not(empty())).
+                body("current.last_updated_epoch", greaterThanOrEqualTo(1683072900)).
+                body("current.condition.icon", startsWith("//cdn.weatherapi.com/weather")).
+                body("location.tz_id", matchesRegex("^[A-Za-z_]+/[A-Za-z_]+$")).
+                time(lessThan(1000L));
+
+
+
+
+
+
+    }
+
+
 
 
 

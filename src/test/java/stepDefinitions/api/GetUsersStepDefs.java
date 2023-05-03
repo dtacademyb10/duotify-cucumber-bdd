@@ -8,8 +8,14 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.apiguardian.api.API;
+import org.junit.Assert;
 import utils.ApiUtils;
 import utils.ConfigReader;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -54,11 +60,35 @@ public class GetUsersStepDefs {
 
     }
     @Then("the response should contain a list of all users with the following fields")
-    public void the_response_should_contain_a_list_of_all_users_with_the_following_fields(io.cucumber.datatable.DataTable dataTable) {
+    public void the_response_should_contain_a_list_of_all_users_with_the_following_fields(List<String> expectedKeys) {
 
+
+        Response response = ApiUtils.getResponse();
+
+        Map<String, Object> map = response.jsonPath().getMap("[0]");
+
+        Set<String> strings = map.keySet();
+
+        List<String> actualKeys = new ArrayList<>(strings);
+
+        Assert.assertEquals(expectedKeys,actualKeys);
+
+
+
+    }
+
+    @Then("the users amount should be {int}")
+    public void the_users_amount_should_be(Integer expected) {
+        // Gpath expression to retrieve the root element -> "$" or ""
+       Assert.assertEquals(expected, Integer.valueOf(ApiUtils.getResponse().jsonPath().getList("").size()));
     }
     @Then("the response should not contain any sensitive information")
     public void the_response_should_not_contain_any_sensitive_information() {
+
+       Assert.assertTrue(!ApiUtils.getResponse().jsonPath().getMap("[0]").containsKey("password"));
+        ApiUtils.getResponse().then().body("[0]", not(hasKey("password")));
+
+
 
     }
     @Then("the response time should be less than {int} ms")
