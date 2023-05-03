@@ -5,6 +5,9 @@ import java.util.Objects;
 public class User {
 
 
+    private String  id;
+
+    private String  createdAt;
     private String  username;
     private String  firstName;
     private String lastName;
@@ -15,6 +18,14 @@ public class User {
 
     public User(){}
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public User(String username, String firstName, String lastName, String email, String password, String signUpDate, String profilePic) {
         this.username = username;
         this.firstName = firstName;
@@ -23,6 +34,14 @@ public class User {
         this.password = password;
         this.signUpDate = signUpDate;
         this.profilePic = profilePic;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -84,6 +103,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
+                "id='" + id + '\'' +
                 "username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

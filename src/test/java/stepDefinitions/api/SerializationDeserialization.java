@@ -2,6 +2,7 @@ package stepDefinitions.api;
 
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import org.junit.Test;
 import stepDefinitions.pojos.User;
@@ -159,7 +160,7 @@ public class SerializationDeserialization {
     }
 
     @Test
-    public void serializeUsingFile(){
+    public void serializeUsingJsonFile(){
 
         given().
 
@@ -171,5 +172,94 @@ public class SerializationDeserialization {
                 then().log().all().
                 assertThat().
                 statusCode(200);
+    }
+
+
+    @Test
+    public void deSerializeUsingString(){
+        String response = given().
+                queryParam("id", 61).
+                queryParam("api_key", ConfigReader.getProperty("api_key")).
+                when().log().all().
+                get("/user").
+                then().log().all().
+                assertThat().
+                statusCode(200).extract().asPrettyString();
+
+        System.out.println(response);
+    }
+
+    @Test
+    public void deSerializeUsingList(){
+        List<Map<String, String>> listOfUsers = given().
+                queryParam("api_key", ConfigReader.getProperty("api_key")).
+                when().log().all().
+                get("/users").
+                then().log().all().
+                assertThat().
+                statusCode(200).extract().as(new TypeRef<List<Map<String, String>>>() {
+                });
+
+        System.out.println(listOfUsers);
+        for (Map<String, String> each : listOfUsers) {
+
+            System.out.println(each);
+
+
+        }
+    }
+
+    @Test
+    public void deSerializeUsingMap(){
+       // extract as generic map
+//        Map map = given().
+//                queryParam("id", 61).
+//                queryParam("api_key", ConfigReader.getProperty("api_key")).
+//                when().log().all().
+//                get("/user").
+//                then().log().all().
+//                assertThat().
+//                statusCode(200).extract().as(Map.class);
+//
+//        Object username = map.get("username");
+//        System.out.println(username);
+
+
+        // extract as specific map
+        Map<String, String> map = given().
+                queryParam("id", 61).
+                queryParam("api_key", ConfigReader.getProperty("api_key")).
+                when().log().all().
+                get("/user").
+                then().log().all().
+                assertThat().
+                statusCode(200).extract().as(new TypeRef<Map<String, String>>() {
+                });
+
+
+        String username = map.get("username");
+        System.out.println(username);
+
+    }
+
+    @Test
+    public void deSerializeUsingPOJO(){
+        User user = given().
+                queryParam("id", 61).
+                queryParam("api_key", ConfigReader.getProperty("api_key")).
+                when().log().all().
+                get("/user").
+                then().log().all().
+                assertThat().
+                statusCode(200).extract().as(User.class);
+
+        System.out.println(user);
+
+        System.out.println(user.getFirstName());
+    }
+
+    @Test
+    public void deSerializeUsingFile(){
+
     }
 }
