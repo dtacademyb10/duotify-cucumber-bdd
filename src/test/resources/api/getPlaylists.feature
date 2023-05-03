@@ -2,7 +2,7 @@
 Feature: GET /playlists API endpoint features
 
 
-  @temp
+
   Scenario: Retrieve all playlists for a specific user successfully
 
 
